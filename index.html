@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bin Yaber Driving Institute</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Bin Yaber Driving Institute - Training Gallery</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background: #003366;
-            padding: 20px;
+            background: linear-gradient(135deg, #003366 0%, #001a33 100%);
+            min-height: 100vh;
+            padding: 15px;
         }
 
         .container {
@@ -23,18 +24,47 @@
             background: white;
             border-radius: 20px;
             padding: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
 
+        /* Header Styles */
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ffd700;
         }
 
         .header h1 {
             color: #003366;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
+        .header h1 i {
+            color: #ffd700;
+            margin-right: 8px;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Gallery Title */
+        .gallery-title {
+            text-align: center;
+            color: #003366;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        /* Gallery Grid */
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -44,35 +74,73 @@
 
         .photo-card {
             background: #f5f5f5;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
             cursor: pointer;
-            border: 2px solid #ffd700;
+            display: flex;
+            flex-direction: column;
+            aspect-ratio: 3/4;
         }
 
-        .photo-card img {
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,51,102,0.3);
+            border-color: #ffd700;
+        }
+
+        .photo-number {
+            background: #003366;
+            color: white;
+            padding: 8px 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .photo-number i {
+            color: #ffd700;
+        }
+
+        .img-wrapper {
             width: 100%;
-            height: 250px;
+            flex: 1;
+            overflow: hidden;
+            background: #f0f0f0;
+            min-height: 0;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
             display: block;
         }
 
+        .photo-card:hover .img-wrapper img {
+            transform: scale(1.05);
+        }
+
         .photo-title {
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
             color: #003366;
+            background: white;
+            font-size: 0.9rem;
+            line-height: 1.3;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: #003366;
-            border-radius: 10px;
-            color: white;
-        }
-
-        /* Fullscreen image overlay - SIMPLE */
+        /* Simple Fullscreen Viewer - No extra features */
         .fullscreen-view {
             display: none;
             position: fixed;
@@ -91,40 +159,254 @@
             object-fit: contain;
         }
 
-        @media (max-width: 768px) {
+        /* Footer Styles - Keep exactly the same */
+        .footer {
+            margin-top: 20px;
+            padding: 25px;
+            background: #003366;
+            border-radius: 15px;
+            color: white;
+            border: 2px solid #ffd700;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 2.2rem;
+            color: #ffd700;
+        }
+
+        .contact-details {
+            line-height: 1.5;
+        }
+
+        .contact-details .name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 3px;
+        }
+
+        .contact-details .title {
+            font-size: 1rem;
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .contact-details .info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        .contact-details .info i {
+            font-size: 0.9rem;
+            color: #ffd700;
+        }
+
+        .contact-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-btn i {
+            font-size: 1.2rem;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .email-btn {
+            background: #EA4335;
+            color: white;
+        }
+
+        .email-btn:hover {
+            background: #D33426;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(234, 67, 53, 0.3);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 15px;
+            color: rgba(255,255,255,0.7);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
             .gallery {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .photo-title {
+                font-size: 0.85rem;
+                min-height: 55px;
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
             .gallery {
-                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            
+            .photo-number {
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .photo-title {
+                font-size: 0.8rem;
+                padding: 8px;
+                min-height: 50px;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .contact-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
+        <!-- Header  -->
         <div class="header">
-            <h1>BIN YABER DRIVING INSTITUTE</h1>
+            <h1>
+                <i class="fas fa-car"></i> 
+                COMPREHENSIVE DRIVING COURSES
+            </h1>
+            <div class="subtitle">
+                <i class="fas fa-star" style="color: #ffd700;"></i>
+                Affordable Pricing & Easy Learning
+                <i class="fas fa-star" style="color: #ffd700;"></i>
+            </div>
         </div>
 
+        <!-- Gallery Title  -->
+        <h2 class="gallery-title">
+            <i class="fas fa-images"></i> 
+            Shifting: Day, Night & Sunday, 5 Days a Week Classes
+            <i class="fas fa-images"></i>
+        </h2>
+        
+        <!-- Gallery Grid -->
         <div class="gallery" id="gallery"></div>
 
-        <div class="footer">
-            <div style="font-size: 1.2rem; margin-bottom: 10px;">Uzair Saddiqui</div>
-            <div style="margin-bottom: 5px;">📞 +971 55 285 7424</div>
-            <div>📧 Muhammad.uzair@binyaber.com</div>
+        <!-- Simple Fullscreen Viewer - NO extra features -->
+        <div id="fullscreenView" class="fullscreen-view" onclick="closeFullscreen()">
+            <img id="fullscreenImage" src="" alt="Full view">
         </div>
-    </div>
 
-    <!-- Simple fullscreen viewer -->
-    <div id="fullscreenView" class="fullscreen-view" onclick="closeFullscreen()">
-        <img id="fullscreenImage" src="" alt="Full view">
+        <!-- Footer - -->
+        <div class="footer">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-user-tie"></i>
+                    <div class="contact-details">
+                        <div class="name">Uzair Saddiqui</div>
+                        <div class="title">Business Development Executive</div>
+                        <div class="info">
+                            <i class="fas fa-phone"></i> +971 55 285 7424
+                        </div>
+                        <div class="info">
+                            <i class="fas fa-envelope"></i> Muhammad.uzair@binyaber.com
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-actions">
+                <a href="https://wa.me/971552857424?text=Hello%20Uzair%2C%20I%27m%20interested%20in%20your%20driving%20institute%20services." 
+                   class="contact-btn whatsapp-btn" 
+                   target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    Chat on WhatsApp
+                </a>
+                
+                <a href="mailto:Muhammad.uzair@binyaber.com?subject=Inquiry%20about%20Driving%20Institute&body=Hello%20Uzair%2C%0A%0AI%20saw%20your%20photo%20gallery%20and%20would%20like%20to%20get%20more%20information%20about%20your%20driving%20institute.%0A%0AThanks%21" 
+                   class="contact-btn email-btn"
+                   target="_blank">
+                    <i class="fas fa-envelope"></i>
+                    Send Email
+                </a>
+            </div>
+        </div>
+
+        <!-- Copyright -  -->
+        <div class="copyright">
+            <i class="fas fa-copyright"></i> 2025 Bin Yaber Driving Institute. All rights reserved.
+        </div>
     </div>
 
     <script>
+        // Photo array -
         const photos = [
             { src: "./New%20folder/9.jpg", title: "Get your licence within 10-15 days" },
             { src: "./New%20folder/2.jpg", title: "LMV automatic" },
@@ -141,19 +423,26 @@
         const fullscreenView = document.getElementById('fullscreenView');
         const fullscreenImage = document.getElementById('fullscreenImage');
 
-        // Build gallery
+        // Build gallery - 
         photos.forEach((photo, index) => {
             const card = document.createElement('div');
             card.className = 'photo-card';
             card.onclick = () => openFullscreen(photo.src);
+            
             card.innerHTML = `
-                <img src="${photo.src}" alt="${photo.title}" onerror="this.src='https://via.placeholder.com/400x300/003366/ffffff?text=Photo'">
+                <div class="photo-number">
+                    <i class="fas fa-camera"></i> Package #${index + 1}
+                </div>
+                <div class="img-wrapper">
+                    <img src="${photo.src}" alt="${photo.title}" onerror="this.src='https://via.placeholder.com/400x300/003366/ffffff?text=${encodeURIComponent(photo.title)}'">
+                </div>
                 <div class="photo-title">${photo.title}</div>
             `;
+            
             gallery.appendChild(card);
         });
 
-        // Simple functions
+        // Simple functions - NO extra features
         function openFullscreen(src) {
             fullscreenImage.src = src;
             fullscreenView.style.display = 'block';
@@ -164,6 +453,13 @@
             fullscreenView.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
+
+        // Close on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && fullscreenView.style.display === 'block') {
+                closeFullscreen();
+            }
+        });
     </script>
 </body>
 </html>
